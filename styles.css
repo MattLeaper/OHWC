@@ -1,0 +1,322 @@
+/* Base reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #ef7b23; /* bright orange base */
+  position: relative; /* needed for pseudo-element overlay */
+
+  /* restored system font stack */
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+body::before {
+  content: "";
+  position: fixed;       /* covers entire viewport */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("images/real_tree.jpg") repeat; /* your tree pattern */
+  background-size: 150px auto;
+  background-position: top left;
+  opacity: 0.08;         /* very faint, orange shows through */
+  z-index: 0;
+  pointer-events: none;   /* doesn’t block clicks */
+}
+
+.content {
+  position: relative;
+  z-index: 1;             /* ensures your content is above the overlay */
+}
+
+.content {
+  width: 100%;
+  margin: 0;                /* full width, flush to edges */
+  padding: 2rem 1rem;       /* vertical spacing; horizontal padding keeps breathing room */
+  background: #fff;
+  border-radius: 0;         /* remove rounded corners for full-bleed look */
+  box-shadow: none;         /* disable wide shadow so it doesn't float */
+}
+.content-inner {
+  max-width: 1200px;        /* wider site content area */
+  margin: 0 auto;           /* center the inner content */
+  padding: 2.5rem;          /* internal spacing */
+}
+
+
+/* Header */
+.site-header {
+  position: relative;
+  overflow: visible; /* allow submenus to extend outside header */
+  background-color: #1f1f1f;
+
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 220' preserveAspectRatio='none'%3E%3Cpath d='M0 150 L180 90 L320 130 L480 70 L650 120 L820 80 L1000 130 L1200 100 L1200 220 L0 220 Z' fill='%233a3a3a'/%3E%3C/svg%3E");
+
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  background-size: 100% 80%;
+
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.site-header,
+.site-header h1,
+.site-header a {
+  color: #ffffff;
+}
+
+
+
+.header-inner {
+  max-width: 1100px;
+  margin: auto;
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* site title */
+.site-title {
+  font-size: 2rem;   /* increased from 1.25rem */
+  font-weight: 600;
+  flex: 0 0 auto;
+}
+
+/* logo wrapper: place at the right edge of the header */
+.logo-wrap {
+  /* keep header-inner centered but allow logo to sit at the far right */
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  pointer-events: none; /* logo isn't interactive; remove if it needs to be clickable */
+}
+
+/* logo sizing */
+.logo {
+  display: inline-block;
+  max-height: 48px;
+  width: auto;
+  border-radius: 8px;
+  pointer-events: auto;
+}
+
+/* Navigation */
+.main-nav {
+  position: relative;
+  z-index: 40;
+}
+
+.main-nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+/* top-level list items are relative (anchor for absolute submenu) */
+.main-nav li {
+  position: relative;
+}
+
+/* submenu: hidden by default and positioned under parent
+   use opacity/visibility/transform so we can add a slight hide-delay */
+.main-nav li ul {
+  position: absolute;
+  top: 100%;                /* no nasty gap between parent and submenu */
+  left: 0;
+  min-width: 180px;
+  background: #2b2b2b;
+  padding: 0.4rem 0;
+  border-radius: 6px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+  z-index: 100;
+
+  /* animation + interactivity */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px);
+  pointer-events: none;
+
+  /* transition: visibility is delayed so hiding waits for fade */
+  transition: opacity .14s ease, transform .14s ease, visibility 0s linear .14s;
+  transition-delay: .12s; /* small delay before hiding */
+}
+
+/* submenu shown on hover / focus */
+.main-nav li:hover > ul,
+.main-nav li:focus-within > ul {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+  transition-delay: 0s; /* show immediately */
+}
+
+/* submenu items */
+.main-nav li ul li {
+  white-space: nowrap;
+}
+
+/* submenu links */
+.main-nav li ul a {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: #ddd;
+}
+
+/* Improve appearance of top-level nav items so they look like buttons */
+.main-nav a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 0.9rem;
+  color: #fff;
+  text-decoration: none;
+  background: rgba(255,255,255,0.04);
+  border: 1px rgba(255,255,255,0.06);
+  border-radius: 8px;
+  font-weight: 600;
+  transition: background .12s ease, transform .06s ease, box-shadow .12s ease;
+  box-shadow: none;
+}
+
+/* stronger hover / focus affordance */
+.main-nav a:hover,
+.main-nav a:focus {
+  background: rgba(255,255,255,0.12);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+  outline: none;
+}
+
+/* reduce visual weight for submenu links */
+.main-nav li ul a {
+  background: transparent;
+  color: #e6e6e6;
+  padding: 0.5rem 1rem;
+  border-radius: 0;
+  border: none;
+  font-weight: 500;
+}
+
+/* keep main nav compact and left-to-right on wide screens */
+.header-inner .main-nav {
+  margin-left: 1rem; /* small gap from the title */
+}
+
+/* spacing fix: ensure list items don't produce weird extra height */
+.main-nav li {
+  margin: 0;
+}
+
+/* basic touch support: toggle on first tap (keeps short) */
+@media (max-width: 920px) {
+  /* if using mobile, make top-level nav vertical; submenus can expand */
+  .main-nav ul {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  .main-nav li ul {
+    position: static;
+    display: none;
+    box-shadow: none;
+    padding-left: 1rem;
+  }
+  /* when a top-level item is given .open (via JS), show its submenu */
+  .main-nav li.open > ul {
+    display: block;
+  }
+}
+
+/* Content */
+.content {
+  max-width: 1400px;
+  margin: 2rem auto;
+  padding: 2rem 1.5rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  font-size: large;
+}
+
+.hero {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.hero h2 {
+  color: #8faab3;
+  font-weight: 600;
+  font-size: 1.4rem;   /* slightly larger */
+}
+
+.hero h3 {
+  font-size: 2.25rem;  /* increased from 2rem */
+  margin: 0.5rem 0;
+}
+
+.date {
+  font-weight: 600;
+  color: #555;
+}
+
+/* Images */
+.image-section img {
+  width: 100%;
+  border-radius: 12px;
+  margin: 2rem 0;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+/* Footer */
+.site-footer {
+  background: #1f1f1f;
+  color: #bbb;
+  text-align: center;
+  padding: 1rem;
+  margin-top: 2rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .main-nav ul {
+    flex-direction: column;
+  }
+
+  .logo-wrap {
+    position: static;
+    transform: none;
+    right: auto;
+    top: auto;
+    margin-left: 0;
+    margin-top: 0.5rem;
+    text-align: right;
+    pointer-events: auto;
+  }
+  .header-inner {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .main-nav ul {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .main-nav a {
+    display: block;
+    width: 100%;
+    padding: 0.6rem 0.9rem;
+    text-align: left;
+  }
+  .main-nav li ul a {
+    padding-left: 1.25rem;
+  }
+}
