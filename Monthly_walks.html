@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Oadby Hillwalking Club </title>
+
+  <meta name="description" content="Oadby Hill Walking Club homepage" />
+      <link rel="icon" type="image/png" href="images/OADBY (1).png">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+
+<body>
+<header class="site-header">
+  <div class="header-inner">
+
+    <h1 class="site-title">
+      <a href="index.html">Oadby Hillwalking Club</a>
+    </h1>
+
+    <nav class="main-nav">
+      <ul>
+        <li>
+          <a href="Monthly_walks.html">Walks</a>
+          <ul>
+            <li><a href="Monthly_walks.html">Walks</a></li>
+            <li><a href="walk_info.html">Essential Information</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="club_info.html">Club Information</a>
+          <ul>
+            <li><a href="club_info.html">Club Information</a></li>
+            <li><a href="membership.html">Membership</a></li>
+          </ul>
+        </li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="safeguarding.html">Safeguarding</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+      </ul>
+    </nav>
+
+    <button class="menu-toggle" aria-label="Open menu">☰</button>
+
+    <div class="logo-wrap">
+      <img src="images/OADBY (1).png" alt="OHWC logo" class="logo">
+    </div>
+
+  </div>
+</header>
+
+<main class="content">
+  <div class="content-inner">
+
+    <section class="hero">
+      <h2>Oadby Hillwalking Club</h2>
+      <h3>Walks</h3>
+       <small>Look in our latest Newsletter for details
+
+</small>
+
+
+    <h3>2026 Montly Walks</h3>
+
+      <ul style="list-style: none; padding-left: 0;">
+    <li><strong>• Jan – Ambergate – Derbyshire (54)</strong></li>
+    <li><strong>• Feb – Blockley – Gloucester (55)</strong></li>
+    <li><strong>• March – Bradwell – Derbyshire (75)</strong></li>
+    <li><strong>• April – Ironbridge – Shropshire (77)</strong></li>
+    <li><strong>• May – High Bradford – S.Yorkshire (81)</strong></li>
+    <li><strong>• June – Hayfield – Derbyshire (85)</strong></li>
+  </ul>
+
+
+
+</section>
+<section>
+  <h3>Walk Information</h3>
+
+  <p>
+    Our monthly walk takes place on the first Sunday of each month 
+    (we avoid Bank Holiday Sundays, so it may be the second Sunday on some occasions). 
+    In summer we aim for destinations such as the Welsh borders or the Dark Peak. 
+    Winter walks are closer to home – the White Peak or the Cotswolds. 
+    Our coach departs from <strong>Oadby East Street Car Park, LE2 5AF</strong> 
+    (near the side entrance of Oadby Trinity Methodist Church) at <strong>08:00 hours</strong> 
+    and returns at approximately <strong>19:30 hours</strong>, a bit later in the summer months. 
+    Note that we also make a small number of pick-ups between Oadby and Fosse Park for members.  
+    Coach fares (paid online, by card or cash/cheque) are: 
+    <strong>Adult members £18, Juniors/Students £10</strong>.
+  </p>
+
+  <p>
+    <strong>
+      To book a place on the coach for the next walk, please contact 
+      <a href="mailto:ohwcmail@gmail.com">ohwcmail@gmail.com</a>.
+    </strong>
+
+    Monthly Walks for 2026 are listed above. The coach will depart from Oadby at 8:00am 
+    and return from the destination at 5:00pm during GMT and 5:30pm during the summer months.
+  </p>
+</section>
+
+
+
+<br>
+<br>
+<section>
+    <h3>Mid-Month Walks</h3>
+
+    <p>Most months, except when a weekend trip takes place, there is a local walk of between 8 and 14 miles on a Sunday.  Sometimes these finish in time for an optional pub lunch, or just a drink.  Other times a packed lunch is taken. Last year one of these walks gave people the opportunity to try orienteering at the Outwoods Centre just north of Leicester.
+    These walks are usually arranged one or two months in advance with details publicised in the newsletter.  The latest newsletters can be found on the News page.
+
+ 
+
+Oadby Hillwalkers feeling blessed with the beautiful Leicestershire countryside and sunshine on the clubs November mid month walk</p>
+</section>
+
+<br>
+<section>
+  <h3>Trips Away!</h3>
+  <p>
+    There are usually one or two trips a year to popular locations such as Snowdonia, the Yorkshire Three Peaks and the Lake District.  Accommodation may be camping, hostels, huts or bed and breakfast with transport arranged between those taking part.  These trips are advertised in the newsletter well in advance with details of accommodation options and costs.  Some of these weekends offer the opportunity for more adventurous walking.
+  </p>
+
+  <br>
+  <strong>Be sure to check out the gallary for photos from our recent monthly walks, mid-month walks and trips away!</strong>
+</section>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <p>
+    © 2026 Oadby Hillwalking Club |
+    Built with ❤️ 
+
+  </p>
+</footer>
+<script>
+const toggle = document.querySelector(".menu-toggle");
+const nav = document.querySelector(".main-nav");
+
+toggle.addEventListener("click", () => {
+  nav.classList.toggle("active");
+  // Close all submenus when toggling main nav
+  document.querySelectorAll('.main-nav li').forEach(li => li.classList.remove('open'));
+});
+
+// Handle submenu toggles on mobile
+document.querySelectorAll('.main-nav > ul > li > a').forEach(a => {
+  a.addEventListener('click', (e) => {
+    if (window.innerWidth <= 768) {
+      const li = a.parentElement;
+      if (li.querySelector('ul')) {
+        e.preventDefault();
+        li.classList.toggle('open');
+      }
+    }
+  });
+});
+
+
+</script>
+</body>
+</html>

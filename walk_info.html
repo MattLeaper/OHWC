@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Oadby Hillwalking Club </title>
+
+  <meta name="description" content="Oadby Hill Walking Club homepage" />
+      <link rel="icon" type="image/png" href="images/OADBY (1).png">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+
+<body>
+<header class="site-header">
+  <div class="header-inner">
+
+    <h1 class="site-title">
+      <a href="index.html">Oadby Hillwalking Club</a>
+    </h1>
+
+    <nav class="main-nav">
+      <ul>
+        <li>
+          <a href="Monthly_walks.html">Walks</a>
+          <ul>
+            <li><a href="Monthly_walks.html">Walks</a></li>
+            <li><a href="walk_info.html">Essential Information</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="club_info.html">Club Information</a>
+          <ul>
+            <li><a href="club_info.html">Club Information</a></li>
+            <li><a href="membership.html">Membership</a></li>
+          </ul>
+        </li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="safeguarding.html">Safeguarding</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+      </ul>
+    </nav>
+
+    <button class="menu-toggle" aria-label="Open menu">☰</button>
+
+    <div class="logo-wrap">
+      <img src="images/OADBY (1).png" alt="OHWC logo" class="logo">
+    </div>
+
+  </div>
+</header>
+
+<main class="content">
+  <div class="content-inner">
+
+    <section class="hero">
+      <h2>Oadby Hillwalking Club</h2>
+      <h3>Essential Information</h3>
+    </section>
+
+    <div class="image-section">
+      <img src="images/OADBY.png" alt="Hillwalking group">
+    </div>
+
+    <section>
+      <h3>Safety Information</h3>
+
+      <p>It is required that members and guests carry a completed safety form and are suitably equipped. As a minimum this includes:</p>
+
+      <ul style="list-style: none; padding-left: 0;">
+        <li>• Stout walking boots</li>
+        <li>• Waterproof coat and over trousers</li>
+        <li>• Warm clothing and spare clothing</li>
+        <li>• Appropriate rucksack</li>
+        <li>• Food and drink for the day</li>
+      </ul>
+
+      <p><strong>Jeans and trainers/sandals are not suitable.</strong></p>
+
+      <p>The safety form can be downloaded here:</p>
+      <p><a href="documents/Safety-form-.pdf">Download Safety Form (PDF)</a></p>
+
+      <p>
+        Members are responsible for ensuring that their guests are acquainted with the terrain,
+        healthy and capable of a full day’s hike.
+      </p>
+
+      <p>
+        A leader may decline to take a member or guest if he/she is of the opinion that
+        the person is inadequately equipped, unfit or the terrain is too demanding.
+      </p>
+
+      <blockquote style="margin:2rem auto; max-width:900px; font-style:italic;">
+        “The club walk organisers are not qualified guides. You join them at your own risk and of your own free will.
+        You are part of an autonomous group, responsible for your own safety and happy to accept the discretion
+        and actions of any or all the participants on that organised walk or activity in the event of injury to you,
+        the need to have you rescued or otherwise.”
+      </blockquote>
+
+      <p>
+        <strong>Registered Assistance Dogs Only</strong> are allowed on club walks.
+        Dogs (on a lead) may be taken on mid-month walks by prior agreement of the walk leader.
+      </p>
+
+      <h3>Insurance</h3>
+
+      <p>
+        Our Civil Liability insurance policy provides cover for legal liability under civil law
+        to the general public for personal injury or damage to property.
+        Full details of the policy are available upon request.
+      </p>
+
+      <p>
+        As required by law, the coach company carries third party insurance and its operating licence.
+      </p>
+
+    </section>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <p>
+    © 2026 Oadby Hillwalking Club |
+    Built with ❤️ 
+
+  </p>
+</footer>
+<script>
+const toggle = document.querySelector(".menu-toggle");
+const nav = document.querySelector(".main-nav");
+
+toggle.addEventListener("click", () => {
+  nav.classList.toggle("active");
+  // Close all submenus when toggling main nav
+  document.querySelectorAll('.main-nav li').forEach(li => li.classList.remove('open'));
+});
+
+// Handle submenu toggles on mobile
+document.querySelectorAll('.main-nav > ul > li > a').forEach(a => {
+  a.addEventListener('click', (e) => {
+    if (window.innerWidth <= 768) {
+      const li = a.parentElement;
+      if (li.querySelector('ul')) {
+        e.preventDefault();
+        li.classList.toggle('open');
+      }
+    }
+  });
+});
+
+
+</script>
+</body>
+</html>

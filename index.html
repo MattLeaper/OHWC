@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Oadby Hillwalking Club </title>
+  <link rel="icon" type="image/png" href="images/OADBY (1).png">
+  <meta name="description" content="Oadby Hill Walking Club homepage" />
+    
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+
+    <h1 class="site-title">
+      <a href="index.html">Oadby Hillwalking Club</a>
+    </h1>
+
+    <nav class="main-nav">
+      <ul>
+        <li>
+          <a href="Monthly_walks.html">Walks</a>
+          <ul>
+            <li><a href="Monthly_walks.html">Walks</a></li>
+            <li><a href="walk_info.html">Essential Information</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="club_info.html">Club Information</a>
+          <ul>
+            <li><a href="club_info.html">Club Information</a></li>
+            <li><a href="membership.html">Membership</a></li>
+          </ul>
+        </li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="safeguarding.html">Safeguarding</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+      </ul>
+    </nav>
+
+    <button class="menu-toggle" aria-label="Open menu">☰</button>
+
+    <div class="logo-wrap">
+      <img src="images/OADBY (1).png" alt="OHWC logo" class="logo">
+    </div>
+  </div>
+
+</header>
+
+
+    <!-- logo sits at the far right of the header -->
+
+<main class="content">
+  <div class="content-inner">
+
+    <section class="hero">
+      <h2>Our next monthly walk</h2>
+      <h3>Blockley, Cotswolds</h3>
+      <p class="date">Sunday 1st January 2026</p>
+    </section>
+
+    <section class="intro">
+      <p>
+Every month we set off by coach to explore some of the country’s most beautiful hillwalking areas, including the Peak District and the Cotswolds – and occasionally even further afield. With a choice of guided walks to suit different distances and abilities, there’s something for everyone to enjoy. And at the end of each walk, we all come together to relax with a well-earned drink before heading back to Leicester.
+      </p>
+    </section>
+
+    <section class="image-section">
+      <img src="images/blockley.jpg" alt="Blockley walk route" />
+    </section>
+
+    <section class="extra">
+      <p>
+        Two or three times a year, weekend trips are arranged to locations such
+        as Wales and the Lake District.
+      </p>
+    </section>
+  </div>
+</main>
+
+
+  <footer class="site-footer">
+    <p>
+      © Oadby Hillwalking Club · Built with ❤️ 
+    </p>
+  </footer>
+  <script>
+const toggle = document.querySelector(".menu-toggle");
+const nav = document.querySelector(".main-nav");
+
+toggle.addEventListener("click", () => {
+  nav.classList.toggle("active");
+  // Close all submenus when toggling main nav
+  document.querySelectorAll('.main-nav li').forEach(li => li.classList.remove('open'));
+});
+
+// Handle submenu toggles on mobile
+document.querySelectorAll('.main-nav > ul > li > a').forEach(a => {
+  a.addEventListener('click', (e) => {
+    if (window.innerWidth <= 768) {
+      const li = a.parentElement;
+      if (li.querySelector('ul')) {
+        e.preventDefault();
+        li.classList.toggle('open');
+      }
+    }
+  });
+});
+
+
+</script>
+</body>
+</html>

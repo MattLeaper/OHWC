@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Oadby Hillwalking Club </title>
+
+  <meta name="description" content="Oadby Hill Walking Club homepage" />
+      <link rel="icon" type="image/png" href="images/OADBY (1).png">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+
+<body>
+<header class="site-header">
+  <div class="header-inner">
+
+    <h1 class="site-title">
+      <a href="index.html">Oadby Hillwalking Club</a>
+    </h1>
+
+    <nav class="main-nav">
+      <ul>
+        <li>
+          <a href="Monthly_walks.html">Walks</a>
+          <ul>
+            <li><a href="Monthly_walks.html">Walks</a></li>
+            <li><a href="walk_info.html">Essential Information</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="club_info.html">Club Information</a>
+          <ul>
+            <li><a href="club_info.html">Club Information</a></li>
+            <li><a href="membership.html">Membership</a></li>
+          </ul>
+        </li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="safeguarding.html">Safeguarding</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+      </ul>
+    </nav>
+
+    <button class="menu-toggle" aria-label="Open menu">☰</button>
+
+    <div class="logo-wrap">
+      <img src="images/OADBY (1).png" alt="OHWC logo" class="logo">
+    </div>
+
+  </div>
+</header>
+
+<main class="content">
+  <div class="content-inner">
+
+    <section class="hero">
+      <h2>Oadby Hillwalking Club</h2>
+      <h3>Gallery</h3>
+    </section>
+<section class="gallery">
+  <h2>Walk Gallery</h2>
+  <p>Photos from our recent walks across the Peak District, Cotswolds and beyond.</p>
+
+  <div class="gallery-grid" id="gallery"></div>
+</section>
+
+<!-- Lightbox overlay -->
+<div id="lightbox" class="lightbox">
+  <span class="close">&times;</span>
+  <img class="lightbox-img" src="" alt="">
+  <a class="prev">&#10094;</a>
+  <a class="next">&#10095;</a>
+</div>
+</main>
+
+<footer class="site-footer">
+  <p>
+    © 2026 Oadby Hillwalking Club |
+    Built with ❤️ 
+
+  </p>
+</footer>
+<script>
+const toggle = document.querySelector(".menu-toggle");
+const nav = document.querySelector(".main-nav");
+
+toggle.addEventListener("click", () => {
+  nav.classList.toggle("active");
+  // Close all submenus when toggling main nav
+  document.querySelectorAll('.main-nav li').forEach(li => li.classList.remove('open'));
+});
+
+// Handle submenu toggles on mobile
+document.querySelectorAll('.main-nav > ul > li > a').forEach(a => {
+  a.addEventListener('click', (e) => {
+    if (window.innerWidth <= 768) {
+      const li = a.parentElement;
+      if (li.querySelector('ul')) {
+        e.preventDefault();
+        li.classList.toggle('open');
+      }
+    }
+  });
+});
+const gallery = document.getElementById("gallery");
+const totalImages = 54; // Number of images in your folder
+const images = []; // Will hold image sources
+
+// Load gallery
+for(let i = 1; i <= totalImages; i++){
+  const imgSrc = `images/image (${i}).jpg`;
+  images.push(imgSrc);
+
+  const img = document.createElement("img");
+  img.src = imgSrc;
+  img.alt = `Gallery image ${i}`;
+  gallery.appendChild(img);
+
+  // Click to open lightbox
+  img.addEventListener("click", () => openLightbox(i-1));
+}
+
+// Lightbox elements
+const lightbox = document.getElementById("lightbox");
+const lightboxImg = document.querySelector(".lightbox-img");
+const closeBtn = document.querySelector(".lightbox .close");
+const prevBtn = document.querySelector(".lightbox .prev");
+const nextBtn = document.querySelector(".lightbox .next");
+
+let currentIndex = 0;
+
+function openLightbox(index) {
+  currentIndex = index;
+  lightbox.style.display = "flex";
+  lightboxImg.src = images[currentIndex];
+}
+
+function closeLightbox() {
+  lightbox.style.display = "none";
+}
+
+function showNext() {
+  currentIndex = (currentIndex + 1) % images.length;
+  lightboxImg.src = images[currentIndex];
+}
+
+function showPrev() {
+  currentIndex = (currentIndex - 1 + images.length) % images.length;
+  lightboxImg.src = images[currentIndex];
+}
+
+// Event listeners
+closeBtn.addEventListener("click", closeLightbox);
+nextBtn.addEventListener("click", showNext);
+prevBtn.addEventListener("click", showPrev);
+
+// Close lightbox on background click
+lightbox.addEventListener("click", e => {
+  if(e.target === lightbox) closeLightbox();
+});
+
+// Keyboard navigation
+document.addEventListener("keydown", e => {
+  if(lightbox.style.display === "flex"){
+    if(e.key === "ArrowRight") showNext();
+    if(e.key === "ArrowLeft") showPrev();
+    if(e.key === "Escape") closeLightbox();
+  }
+});
+
+</script>
+</body>
+</html>

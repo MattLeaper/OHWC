@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Oadby Hillwalking Club </title>
+
+  <meta name="description" content="Oadby Hill Walking Club homepage" />
+      <link rel="icon" type="image/png" href="images/OADBY (1).png">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+
+    <h1 class="site-title">
+      <a href="index.html">Oadby Hillwalking Club</a>
+    </h1>
+
+    <nav class="main-nav">
+      <ul>
+        <li>
+          <a href="Monthly_walks.html">Walks</a>
+          <ul>
+            <li><a href="Monthly_walks.html">Walks</a></li>
+            <li><a href="walk_info.html">Essential Information</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="club_info.html">Club Information</a>
+          <ul>
+            <li><a href="club_info.html">Club Information</a></li>
+            <li><a href="membership.html">Membership</a></li>
+          </ul>
+        </li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="safeguarding.html">Safeguarding</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+      </ul>
+    </nav>
+
+    <button class="menu-toggle" aria-label="Open menu">☰</button>
+
+    <div class="logo-wrap">
+      <img src="images/OADBY (1).png" alt="OHWC logo" class="logo">
+    </div>
+
+  </div>
+</header>
+<main class="content">
+  <div class="content-inner">
+
+    <section class="hero">
+      <h2>Oadby Hillwalking Club</h2>
+    </section>
+
+
+    <section>
+<h1>Membership</h1>
+
+An annual subscription, valid from 01 May 2025 to 30 April 2026 was due following the club’s annual general meeting held in April where fees for the coming year were agreed.
+<br>
+
+It is a requirement of our Public Liability Insurance that the application form is completed and returned to the Membership Secretary by the 31st May 2025 to reinstate the necessary cover for our walkers and leaders.
+<br>
+<strong>Annual subscriptions 2025-2026</strong>
+<br>
+<strong>Adult member £15 per annum </strong> 
+<br>
+<strong>Juniors (11-18) £10 per annum</strong>
+<br>
+<strong>Full time students (18-21) £10 per annum</strong>
+<br>
+A monthly newsletter will be sent to all members by email.
+<br>
+<strong>To apply or renew membership you can download an application form by clicking the following link. To comply with current data protection laws all members must also complete the GDPR consent form.</strong>
+<br>
+<a href="documents/20250116_OHWC-Membership-Form_2025-2026_v2.0.docx"><strong>Membership Application Form 2025-2026</strong></a>
+<br>
+ 
+
+
+ 
+
+Please send your completed form together with a cheque (payable to OHWC) for the correct amount to the Membership Secretary at the address shown, alternatively pay by bank transfer as detailed on the form.
+<br>
+<strong>Guests/prospective members</strong> are invited to come on any 3 walks (monthly and mid-month) before being offered membership.
+<br>
+Existing members renewing their membership must pay the full annual subscription, whenever they renew.  New members to pay the full <strong>£15</strong> when joining during <strong>May - August;</strong> <strong>£10</strong> when joining <strong>September – December;</strong> <strong>£5</strong> when joining <strong>January  – April.</strong>
+
+ 
+    </section>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <p>
+    © 2026 Oadby Hillwalking Club |
+    Built with ❤️ 
+
+  </p>
+</footer>
+<script>
+const toggle = document.querySelector(".menu-toggle");
+const nav = document.querySelector(".main-nav");
+
+toggle.addEventListener("click", () => {
+  nav.classList.toggle("active");
+  // Close all submenus when toggling main nav
+  document.querySelectorAll('.main-nav li').forEach(li => li.classList.remove('open'));
+});
+
+// Handle submenu toggles on mobile
+document.querySelectorAll('.main-nav > ul > li > a').forEach(a => {
+  a.addEventListener('click', (e) => {
+    if (window.innerWidth <= 768) {
+      const li = a.parentElement;
+      if (li.querySelector('ul')) {
+        e.preventDefault();
+        li.classList.toggle('open');
+      }
+    }
+  });
+});
+
+
+</script>
+</body>
+</html>
