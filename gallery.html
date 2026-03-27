@@ -103,21 +103,28 @@ document.querySelectorAll('.main-nav > ul > li > a').forEach(a => {
   });
 });
 const gallery = document.getElementById("gallery");
-const totalImages = 54; // Number of images in your folder
-const images = []; // Will hold image sources
+const totalImages = 54;
+const images = [];
 
-// Load gallery
+const firstImg = "images/WhatsApp Image 2026-03-27 at 11.13.43.jpg";
+images.push(firstImg);
+
+const first = document.createElement("img");
+first.src = firstImg;
+first.alt = "Gallery image 1";
+gallery.appendChild(first);
+first.addEventListener("click", () => openLightbox(0));
+
 for(let i = 1; i <= totalImages; i++){
   const imgSrc = `images/image (${i}).jpg`;
   images.push(imgSrc);
 
   const img = document.createElement("img");
   img.src = imgSrc;
-  img.alt = `Gallery image ${i}`;
+  img.alt = `Gallery image ${i+1}`;
   gallery.appendChild(img);
 
-  // Click to open lightbox
-  img.addEventListener("click", () => openLightbox(i-1));
+  img.addEventListener("click", () => openLightbox(images.length - 1));
 }
 
 // Lightbox elements
