@@ -124,7 +124,7 @@ for(let i = 1; i <= totalImages; i++){
   img.alt = `Gallery image ${i+1}`;
   gallery.appendChild(img);
 
-  img.addEventListener("click", () => openLightbox(images.length - 1));
+  img.addEventListener("click", () => openLightbox(i));
 }
 
 // Lightbox elements
