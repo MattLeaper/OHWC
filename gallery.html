@@ -115,16 +115,16 @@ first.alt = "Gallery image 1";
 gallery.appendChild(first);
 first.addEventListener("click", () => openLightbox(0));
 
-for(let i = 1; i <= totalImages; i++){
+for(let i = totalImages; i >= 1; i--){
   const imgSrc = `images/image (${i}).jpg`;
   images.push(imgSrc);
 
   const img = document.createElement("img");
   img.src = imgSrc;
-  img.alt = `Gallery image ${i+1}`;
+  img.alt = `Gallery image ${totalImages - i + 2}`;
   gallery.appendChild(img);
 
-  img.addEventListener("click", () => openLightbox(i));
+  img.addEventListener("click", () => openLightbox(images.length - 1));
 }
 
 // Lightbox elements
