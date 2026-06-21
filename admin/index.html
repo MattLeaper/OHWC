@@ -7,6 +7,25 @@
   </head>
   <body>
     <!-- Include the script that builds the Decap CMS UI -->
-    <script src="https://unpkg.com@^3.0.0/dist/decap-cms.js"></script>
+    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+
+    <!-- Diagnostic fallback: visible message if JS fails, and log config.yml fetch -->
+    <noscript>
+      <strong>JavaScript is required to run the admin. Enable JavaScript and reload.</strong>
+    </noscript>
+    <div id="admin-diagnostics" style="font-family:system-ui,Segoe UI,Roboto,Arial;margin:1rem;padding:1rem;">
+      <p>If the admin UI is blank, open the browser console for errors. You can also check the config directly:</p>
+      <p><a href="/admin/config.yml">/admin/config.yml</a></p>
+    </div>
+    <script>
+      // Try fetching config.yml to surface network errors in the console
+      fetch('/admin/config.yml', { cache: 'no-store' })
+        .then(r => {
+          if(!r.ok) throw new Error('HTTP ' + r.status);
+          return r.text();
+        })
+        .then(text => console.info('Loaded /admin/config.yml (first 300 chars):\n', text.slice(0,300)))
+        .catch(err => console.error('Failed to load /admin/config.yml:', err));
+    </script>
   </body>
 </html>
