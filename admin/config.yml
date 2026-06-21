@@ -1,0 +1,25 @@
+backend:
+  # For Netlify use the git-gateway backend which integrates with
+  # Netlify Identity + Git Gateway. This allows site editors to login
+  # with Netlify Identity and commit changes back to the repository.
+  name: git-gateway
+  branch: main # Change to your default branch if it is master
+
+media_folder: "images/uploads" # Where uploaded images will save in your repo
+public_folder: "/images/uploads" # Path the website uses to view those images
+
+# For Netlify: enable Identity and Git Gateway in your Netlify site settings.
+# Netlify will handle authentication; Decap CMS will use Netlify Identity
+# automatically when you open `/admin/` on your deployed site.
+
+collections:
+  - name: "blog" # Used in routes, e.g., admin/#/collections/blog
+    label: "Blog Posts" # UI label
+    folder: "_posts" # The directory where your files live
+    create: true # Allow users to create new files
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields: # The form fields for the editor
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Publish Date", name: "date", widget: "datetime" }
+      - { label: "Featured Image", name: "thumbnail", widget: "image", required: false }
+      - { label: "Body", name: "body", widget: "markdown" }
