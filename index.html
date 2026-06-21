@@ -120,4 +120,12 @@ document.querySelectorAll('.main-nav > ul > li > a').forEach(a => {
     window.netlifyIdentity.init();
   }
 </script>
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script>
+  netlifyIdentity.init();
+
+  netlifyIdentity.on("init", () => {
+    netlifyIdentity.handleUrl(); // THIS triggers reset flow UI
+  });
+</script>
 </html>
