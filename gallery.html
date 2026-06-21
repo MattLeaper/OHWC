@@ -36,8 +36,7 @@
           </ul>
         </li>
         <li><a href="news.html">News</a></li>
-        <li><a href="safeguarding.html">Safeguarding</a></li>
-        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="safeguarding.html">Safeguarding</a></li> 
       </ul>
     </nav>
 
@@ -60,14 +59,16 @@
 <section class="gallery">
   <h2>Walk Gallery</h2>
   <p>Photos from our recent walks across the Peak District, Cotswolds and beyond.</p>
-
   <div class="gallery-grid" id="gallery"></div>
 </section>
+
+</div>
 
 <!-- Lightbox overlay -->
 <div id="lightbox" class="lightbox">
   <span class="close">&times;</span>
   <img class="lightbox-img" src="" alt="">
+  <video class="lightbox-video" src="" controls></video>
   <a class="prev">&#10094;</a>
   <a class="next">&#10095;</a>
 </div>
@@ -104,33 +105,51 @@ document.querySelectorAll('.main-nav > ul > li > a').forEach(a => {
 });
 const gallery = document.getElementById("gallery");
 const totalImages = 64;
-const images = [];
+// store items as objects so we can support both images and videos
+const items = [];
 
-const firstImg = "images/WhatsApp Image 2026-03-27 at 11.13.43.jpeg";
-images.push(firstImg);
+const firstImg = { src: "images/WhatsApp Image 2026-03-27 at 11.13.43.jpeg", type: 'image', alt: 'Gallery image 1' };
+items.push(firstImg);
 
-const first = document.createElement("img");
-first.src = firstImg;
-first.alt = "Gallery image 1";
-gallery.appendChild(first);
-first.addEventListener("click", () => openLightbox(0));
+function createGalleryItem(item, index){
+  let el;
+  if(item.type === 'video'){
+    el = document.createElement('video');
+    el.src = item.src;
+    el.muted = true;
+    el.loop = true;
+    el.playsInline = true;
+    el.setAttribute('aria-label', item.alt || 'Gallery video');
+  } else {
+    el = document.createElement('img');
+    el.src = item.src;
+    el.alt = item.alt || '';
+  }
+  el.classList.add('gallery-thumb');
+  el.addEventListener('click', () => openLightbox(index));
+  gallery.appendChild(el);
+}
+
+// add first item
+createGalleryItem(firstImg, 0);
 
 for(let i = totalImages; i >= 1; i--){
   const imgSrc = `images/image (${i}).jpg`;
-  images.push(imgSrc);
-  const imageIndex = images.length - 1;
-
-  const img = document.createElement("img");
-  img.src = imgSrc;
-  img.alt = `Gallery image ${totalImages - i + 2}`;
-  gallery.appendChild(img);
-
-  img.addEventListener("click", () => openLightbox(imageIndex));
+  const imgItem = { src: imgSrc, type: 'image', alt: `Gallery image ${totalImages - i + 2}` };
+  items.push(imgItem);
+  createGalleryItem(imgItem, items.length - 1);
 }
+
+// Explicitly add an MP4 if present (thumbnail will be a muted looping video)
+// This file exists in the repo as images/image (1).mp4
+const mp4Item = { src: 'images/image (1).mp4', type: 'video', alt: 'Walk video' };
+items.push(mp4Item);
+createGalleryItem(mp4Item, items.length - 1);
 
 // Lightbox elements
 const lightbox = document.getElementById("lightbox");
 const lightboxImg = document.querySelector(".lightbox-img");
+const lightboxVideo = document.querySelector(".lightbox-video");
 const closeBtn = document.querySelector(".lightbox .close");
 const prevBtn = document.querySelector(".lightbox .prev");
 const nextBtn = document.querySelector(".lightbox .next");
@@ -140,21 +159,40 @@ let currentIndex = 0;
 function openLightbox(index) {
   currentIndex = index;
   lightbox.style.display = "flex";
-  lightboxImg.src = images[currentIndex];
+  const item = items[currentIndex];
+  // hide both first, then show the one we need
+  lightboxImg.style.display = 'none';
+  lightboxVideo.style.display = 'none';
+  lightboxVideo.pause();
+  lightboxVideo.removeAttribute('src');
+
+  if(item.type === 'video'){
+    lightboxVideo.src = item.src;
+    lightboxVideo.style.display = 'block';
+    // allow controls in lightbox
+    setTimeout(() => { lightboxVideo.play().catch(()=>{}); }, 100);
+  } else {
+    lightboxImg.src = item.src;
+    lightboxImg.style.display = 'block';
+  }
 }
 
 function closeLightbox() {
   lightbox.style.display = "none";
+  lightboxVideo.pause();
 }
 
 function showNext() {
-  currentIndex = (currentIndex + 1) % images.length;
-  lightboxImg.src = images[currentIndex];
+  // pause any playing video
+  lightboxVideo.pause();
+  currentIndex = (currentIndex + 1) % items.length;
+  openLightbox(currentIndex);
 }
 
 function showPrev() {
-  currentIndex = (currentIndex - 1 + images.length) % images.length;
-  lightboxImg.src = images[currentIndex];
+  lightboxVideo.pause();
+  currentIndex = (currentIndex - 1 + items.length) % items.length;
+  openLightbox(currentIndex);
 }
 
 // Event listeners
