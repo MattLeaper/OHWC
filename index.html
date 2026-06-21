@@ -9,6 +9,7 @@
     
   <link rel="stylesheet" href="styles.css" />
 </head>
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 <body>
 <header class="site-header">
   <div class="header-inner">
@@ -110,4 +111,13 @@ document.querySelectorAll('.main-nav > ul > li > a').forEach(a => {
 
 </script>
 </body>
+<script>
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", user => {
+      window.netlifyIdentity.handleUrl();
+    });
+
+    window.netlifyIdentity.init();
+  }
+</script>
 </html>
