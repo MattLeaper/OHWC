@@ -37,6 +37,7 @@
         </li>
         <li><a href="news.html">News</a></li>
         <li><a href="safeguarding.html">Safeguarding</a></li> 
+        <li><a href="gallery.html">Gallery</a></li>
       </ul>
     </nav>
 
@@ -126,7 +127,7 @@ function createGalleryItem(item, index){
     el.alt = item.alt || '';
   }
   el.classList.add('gallery-thumb');
-  el.addEventListener('click', () => openLightbox(index));
+  el.addEventListener('click', () => openLightbox(index));  
   gallery.appendChild(el);
 }
 
@@ -134,7 +135,7 @@ function createGalleryItem(item, index){
 createGalleryItem(firstImg, 0);
 
 for(let i = totalImages; i >= 1; i--){
-  const imgSrc = `images/image (${i}).jpg`;
+  const imgSrc = `images/image  (${i}).jpg`;
   const imgItem = { src: imgSrc, type: 'image', alt: `Gallery image ${totalImages - i + 2}` };
   items.push(imgItem);
   createGalleryItem(imgItem, items.length - 1);
@@ -142,7 +143,7 @@ for(let i = totalImages; i >= 1; i--){
 
 // Explicitly add an MP4 if present (thumbnail will be a muted looping video)
 // This file exists in the repo as images/image (1).mp4
-const mp4Item = { src: 'images/image (1).mp4', type: 'video', alt: 'Walk video' };
+const mp4Item = { src: 'images/image  (1).mp4', type: 'video', alt: 'Walk video' };
 items.push(mp4Item);
 createGalleryItem(mp4Item, items.length - 1);
 
