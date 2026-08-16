@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Oadby Hillwalking Club </title>
+
+  <meta name="description" content="Book your seat on the next OHWC coach trip" />
+      <link rel="icon" type="image/png" href="images/OADBY (1).png">
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    .booking-app{ --b-accent:#ef7b23; --b-accent-dark:#c95f10; --b-dark:#1f1f1f;
+      --b-muted:#726b60; --b-line:#e6dfd0; --b-success:#2f7a4f; --b-success-bg:#eaf5ee;
+      --b-full:#b3261e; --b-full-bg:#fbeceb; --b-o:#3d6ea5; --b-ar:#7a4fa0; --b-ppr:#b3261e; --b-fp:#2f7a4f; }
+    .booking-app *{box-sizing:border-box;}
+    .booking-app{margin-top:1.5rem;}
+    .booking-app .b-note{
+      background:#fbf3e6;border:1px solid #edd9ad;color:#7a5a12;
+      font-size:.82rem;padding:.8rem 1rem;border-radius:8px;margin-bottom:1.3rem;line-height:1.55;
+    }
+    .booking-app .b-tabs{display:flex;gap:.4rem;margin-bottom:1.3rem;flex-wrap:wrap;}
+    .booking-app .b-tab{
+      padding:.5rem 1rem;border-radius:8px;font-size:.85rem;font-weight:600;cursor:pointer;
+      border:1px solid var(--b-line);background:#fff;color:var(--b-muted);
+    }
+    .booking-app .b-tab.active{background:var(--b-dark);color:#fff;border-color:var(--b-dark);}
+    .booking-app .b-panel{display:none;}
+    .booking-app .b-panel.active{display:block;}
+    .booking-app .b-form-wrap iframe{width:100%;max-width:640px;border:none;display:block;margin:0 auto;}
+    .booking-app .b-capacity-row{
+      display:flex;align-items:center;justify-content:space-between;gap:.8rem;
+      border:1px solid var(--b-line);border-radius:8px;padding:.7rem .9rem;margin-bottom:.5rem;
+    }
+    .booking-app .b-capacity-row .b-walk-name{font-weight:600;font-size:.9rem;}
+    .booking-app .b-capacity-row .b-spots{font-size:.8rem;color:var(--b-muted);}
+    .booking-app .b-capacity-row.full .b-spots{color:var(--b-full);font-weight:700;}
+    .booking-app .b-pill{
+      font-family:"Consolas","SFMono-Regular",Menlo,monospace;font-size:.68rem;font-weight:700;
+      padding:.2rem .55rem;border-radius:999px;color:#fff;
+    }
+    .booking-app .b-pill.open{background:var(--b-success);}
+    .booking-app .b-pill.full{background:var(--b-full);}
+    .booking-app table{width:100%;border-collapse:collapse;font-size:.86rem;margin-top:.5rem;}
+    .booking-app th{
+      text-align:left;font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;color:var(--b-muted);
+      border-bottom:1px solid var(--b-line);padding:.5rem .4rem;
+    }
+    .booking-app td{padding:.6rem .4rem;border-bottom:1px solid var(--b-line);vertical-align:middle;text-align:left;}
+    .booking-app tr:last-child td{border-bottom:none;}
+    .booking-app .b-row-num{font-family:"Consolas","SFMono-Regular",Menlo,monospace;color:var(--b-muted);font-size:.78rem;}
+    .booking-app .b-badge{
+      font-family:"Consolas","SFMono-Regular",Menlo,monospace;font-size:.68rem;font-weight:700;color:#fff;
+      padding:.15rem .45rem;border-radius:4px;
+    }
+    .booking-app .b-badge[data-code="Oadby (O)"], .booking-app .b-badge[data-code="O"]{background:var(--b-o);}
+    .booking-app .b-badge[data-code="Aderdale Road (AR)"], .booking-app .b-badge[data-code="AR"]{background:var(--b-ar);}
+    .booking-app .b-badge[data-code="Pork Pie Roundabout (PPR)"], .booking-app .b-badge[data-code="PPR"]{background:var(--b-ppr);}
+    .booking-app .b-badge[data-code="Fosse Park (FP)"], .booking-app .b-badge[data-code="FP"]{background:var(--b-fp);}
+    .booking-app .b-empty{text-align:center;padding:2rem 1rem;color:var(--b-muted);font-size:.88rem;border:1px dashed var(--b-line);border-radius:10px;}
+    .booking-app .b-refresh-btn{
+      background:none;border:1px solid var(--b-line);color:#232323;padding:.4rem .8rem;
+      border-radius:6px;font-size:.78rem;cursor:pointer;margin-bottom:1rem;
+    }
+    .booking-app .b-refresh-btn:hover{border-color:var(--b-accent);color:var(--b-accent-dark);}
+    .booking-app .b-loading{color:var(--b-muted);font-size:.85rem;padding:1rem 0;}
+  </style>
+</head>
+
+
+<body>
+<header class="site-header">
+  <div class="header-inner">
+
+    <h1 class="site-title">
+      <a href="index.html">Oadby Hillwalking Club</a>
+    </h1>
+
+    <nav class="main-nav">
+      <ul>
+        <li>
+          <a href="Monthly_walks.html">Walks</a>
+          <ul>
+            <li><a href="Monthly_walks.html">Walks</a></li>
+            <li><a href="walk_info.html">Essential Information</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="club_info.html">Club Information</a>
+          <ul>
+            <li><a href="club_info.html">Club Information</a></li>
+            <li><a href="membership.html">Membership</a></li>
+          </ul>
+        </li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="safeguarding.html">Safeguarding</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="coach_signup.html">Book Coach</a></li>
+      </ul>
+    </nav>
+
+    <button class="menu-toggle" aria-label="Open menu">☰</button>
+
+    <div class="logo-wrap">
+      <img src="images/OADBY (1).png" alt="OHWC logo" class="logo">
+    </div>
+
+  </div>
+</header>
+
+<main class="content">
+  <div class="content-inner">
+
+    <section class="hero">
+      <h2>Oadby Hillwalking Club</h2>
+      <h3>Book Your Coach Seat</h3>
+    </section>
+
+    <section>
+      <div class="booking-app" id="bookingApp">
+
+        <div class="b-note">Already booked and need to cancel? Use the "edit your response" link Google emailed you when you submitted the form — just delete your row there. If you can't find it, contact <a href="mailto:ohwcmail@gmail.com">ohwcmail@gmail.com</a>.</div>
+
+        <div class="b-tabs" id="bTabs">
+          <div class="b-tab active" data-tab="signup">Sign up</div>
+          <div class="b-tab" data-tab="roster">Who's coming</div>
+          <div class="b-tab" data-tab="capacity">Walk spaces</div>
+        </div>
+
+        <div class="b-panel active" id="bPanelSignup">
+          <div class="b-form-wrap">
+            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSew1yK84Hyae41sqkBglRRFsEiV_KV1Kq2REu2MI1MkElmCaQ/viewform?embedded=true" width="640" height="1197" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+          </div>
+        </div>
+
+        <div class="b-panel" id="bPanelRoster">
+          <button class="b-refresh-btn" id="bRefreshRosterBtn">↻ Refresh</button>
+          <div id="bRosterWrap"><div class="b-loading">Loading…</div></div>
+        </div>
+
+        <div class="b-panel" id="bPanelCapacity">
+          <button class="b-refresh-btn" id="bRefreshCapacityBtn">↻ Refresh</button>
+          <div id="bCapacityWrap"><div class="b-loading">Loading…</div></div>
+        </div>
+
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <p>
+    © 2026 Oadby Hillwalking Club |
+    Built with ❤️ 
+
+  </p>
+</footer>
+
+<script>
+const toggle = document.querySelector(".menu-toggle");
+const nav = document.querySelector(".main-nav");
+toggle.addEventListener("click", () => {
+  nav.classList.toggle("active");
+  document.querySelectorAll('.main-nav li').forEach(li => li.classList.remove('open'));
+});
+document.querySelectorAll('.main-nav > ul > li > a').forEach(a => {
+  a.addEventListener('click', (e) => {
+    if (window.innerWidth <= 768) {
+      const li = a.parentElement;
+      if (li.querySelector('ul')) {
+        e.preventDefault();
+        li.classList.toggle('open');
+      }
+    }
+  });
+});
+</script>
+
+<script>
+(function(){
+  // ---------------------------------------------------------------------
+  // Fill these in once you've published the two tabs — see the message
+  // in chat for exactly where to get them (Sheet -> File -> Share ->
+  // Publish to web, choose the tab, choose CSV).
+  // ---------------------------------------------------------------------
+  const ROSTER_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSJ6z8RFifirSyrF-pzS0U8zv-09tymow4rCDSd-yYQsUw2e8A1b95AYN-jgmaBdvOhjWuHTKVAgfLb/pub?gid=1551266036&single=true&output=csv';
+  const CAPACITY_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSJ6z8RFifirSyrF-pzS0U8zv-09tymow4rCDSd-yYQsUw2e8A1b95AYN-jgmaBdvOhjWuHTKVAgfLb/pub?gid=215921025&single=true&output=csv';
+
+  function escapeHtml(str){
+    const d = document.createElement('div');
+    d.textContent = str || '';
+    return d.innerHTML;
+  }
+
+  // Simple CSV parser — handles quoted fields with commas inside them
+  function parseCsv(text){
+    const rows = [];
+    let row = [], field = '', inQuotes = false;
+    for(let i=0;i<text.length;i++){
+      const c = text[i];
+      if(inQuotes){
+        if(c === '"'){
+          if(text[i+1] === '"'){ field += '"'; i++; }
+          else { inQuotes = false; }
+        } else field += c;
+      } else {
+        if(c === '"') inQuotes = true;
+        else if(c === ','){ row.push(field); field=''; }
+        else if(c === '\n' || c === '\r'){
+          if(field.length || row.length){ row.push(field); rows.push(row); }
+          row = []; field = '';
+          if(c === '\r' && text[i+1] === '\n') i++;
+        } else field += c;
+      }
+    }
+    if(field.length || row.length){ row.push(field); rows.push(row); }
+    return rows.filter(r => r.some(c => c !== ''));
+  }
+
+  function switchTab(tab){
+    document.querySelectorAll('#bTabs .b-tab').forEach(t=>t.classList.toggle('active', t.getAttribute('data-tab')===tab));
+    document.getElementById('bPanelSignup').classList.toggle('active', tab==='signup');
+    document.getElementById('bPanelRoster').classList.toggle('active', tab==='roster');
+    document.getElementById('bPanelCapacity').classList.toggle('active', tab==='capacity');
+    if(tab==='roster') loadRoster();
+    if(tab==='capacity') loadCapacity();
+  }
+  document.getElementById('bTabs').addEventListener('click', e=>{
+    const tab = e.target.closest('.b-tab');
+    if(tab) switchTab(tab.getAttribute('data-tab'));
+  });
+
+  async function loadRoster(){
+    const wrap = document.getElementById('bRosterWrap');
+    if(!ROSTER_CSV_URL){
+      wrap.innerHTML = '<div class="b-empty">The live roster isn\'t connected yet — once published, it\'ll appear here.</div>';
+      return;
+    }
+    wrap.innerHTML = '<div class="b-loading">Loading…</div>';
+    try{
+      const res = await fetch(ROSTER_CSV_URL + (ROSTER_CSV_URL.includes('?') ? '&' : '?') + 'ts=' + Date.now());
+      const text = await res.text();
+      const rows = parseCsv(text).slice(1); // drop header row
+      if(rows.length === 0){
+        wrap.innerHTML = '<div class="b-empty">No one has signed up yet — be the first!</div>';
+        return;
+      }
+      let html = rows.map((r,i)=>{
+        const [name, pickup, walk] = r;
+        return '<tr><td class="b-row-num">'+(i+1)+'</td>' +
+          '<td>'+escapeHtml(name)+'</td>' +
+          '<td><span class="b-badge" data-code="'+escapeHtml(pickup)+'">'+escapeHtml(pickup)+'</span></td>' +
+          '<td>'+escapeHtml(walk)+'</td></tr>';
+      }).join('');
+      wrap.innerHTML = '<table><thead><tr><th>#</th><th>Name</th><th>Pick-up</th><th>Walk</th></tr></thead><tbody>'+html+'</tbody></table>';
+    }catch(err){
+      wrap.innerHTML = '<div class="b-empty">Couldn\'t load the roster right now — try refreshing.</div>';
+    }
+  }
+
+  async function loadCapacity(){
+    const wrap = document.getElementById('bCapacityWrap');
+    if(!CAPACITY_CSV_URL){
+      wrap.innerHTML = '<div class="b-empty">Live walk spaces aren\'t connected yet — once published, it\'ll appear here.</div>';
+      return;
+    }
+    wrap.innerHTML = '<div class="b-loading">Loading…</div>';
+    try{
+      const res = await fetch(CAPACITY_CSV_URL + (CAPACITY_CSV_URL.includes('?') ? '&' : '?') + 'ts=' + Date.now());
+      const text = await res.text();
+      const rows = parseCsv(text).slice(1);
+      if(rows.length === 0){
+        wrap.innerHTML = '<div class="b-empty">No walks open yet for this trip.</div>';
+        return;
+      }
+      let html = rows.map(r=>{
+        const [walk, booked, cap, left, status] = r;
+        const full = status === 'FULL';
+        return '<div class="b-capacity-row'+(full?' full':'')+'">' +
+          '<div class="b-walk-name">'+escapeHtml(walk)+'</div>' +
+          '<div class="b-spots">'+escapeHtml(left)+' of '+escapeHtml(cap)+' spots left</div>' +
+          '<span class="b-pill '+(full?'full':'open')+'">'+(full?'FULL':'OPEN')+'</span>' +
+          '</div>';
+      }).join('');
+      wrap.innerHTML = html;
+    }catch(err){
+      wrap.innerHTML = '<div class="b-empty">Couldn\'t load walk spaces right now — try refreshing.</div>';
+    }
+  }
+
+  document.getElementById('bRefreshRosterBtn').addEventListener('click', loadRoster);
+  document.getElementById('bRefreshCapacityBtn').addEventListener('click', loadCapacity);
+})();
+</script>
+</body>
+</html>

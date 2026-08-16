@@ -66,6 +66,8 @@
 </div>
 
 <!-- Lightbox overlay -->
+
+</main>
 <div id="lightbox" class="lightbox">
   <span class="close">&times;</span>
   <img class="lightbox-img" src="" alt="">
@@ -73,8 +75,6 @@
   <a class="prev">&#10094;</a>
   <a class="next">&#10095;</a>
 </div>
-</main>
-
 <footer class="site-footer">
   <p>
     © 2026 Oadby Hillwalking Club |
@@ -144,8 +144,11 @@ for(let i = totalImages; i >= 1; i--){
 // Explicitly add an MP4 if present (thumbnail will be a muted looping video)
 // This file exists in the repo as images/image (1).mp4
 const mp4Item = { src: 'images/image  (1).mp4', type: 'video', alt: 'Walk video' };
+const mp4Item2 = { src: 'images/image  (2).mp4', type: 'video', alt: 'Walk video 2' };
 items.push(mp4Item);
 createGalleryItem(mp4Item, items.length - 1);
+items.push(mp4Item2);
+createGalleryItem(mp4Item2, items.length - 1);
 
 // Lightbox elements
 const lightbox = document.getElementById("lightbox");
@@ -160,18 +163,20 @@ let currentIndex = 0;
 function openLightbox(index) {
   currentIndex = index;
   lightbox.style.display = "flex";
+  lightbox.classList.remove('is-open');
+  void lightbox.offsetWidth; // force reflow so the animation restarts reliably
+  lightbox.classList.add('is-open');
+
   const item = items[currentIndex];
-  // hide both first, then show the one we need
   lightboxImg.style.display = 'none';
   lightboxVideo.style.display = 'none';
   lightboxVideo.pause();
   lightboxVideo.removeAttribute('src');
 
-  if(item.type === 'video'){
+  if (item.type === 'video') {
     lightboxVideo.src = item.src;
     lightboxVideo.style.display = 'block';
-    // allow controls in lightbox
-    setTimeout(() => { lightboxVideo.play().catch(()=>{}); }, 100);
+    setTimeout(() => { lightboxVideo.play().catch(() => {}); }, 100);
   } else {
     lightboxImg.src = item.src;
     lightboxImg.style.display = 'block';
@@ -179,10 +184,10 @@ function openLightbox(index) {
 }
 
 function closeLightbox() {
+  lightbox.classList.remove('is-open');
   lightbox.style.display = "none";
   lightboxVideo.pause();
 }
-
 function showNext() {
   // pause any playing video
   lightboxVideo.pause();
