@@ -105,7 +105,7 @@ document.querySelectorAll('.main-nav > ul > li > a').forEach(a => {
   });
 });
 const gallery = document.getElementById("gallery");
-const totalImages = 121;
+const totalImages = 133;
 // store items as objects so we can support both images and videos
 const items = [];
 
@@ -145,10 +145,13 @@ for(let i = totalImages; i >= 1; i--){
 // This file exists in the repo as images/image (1).mp4
 const mp4Item = { src: 'images/image  (1).mp4', type: 'video', alt: 'Walk video' };
 const mp4Item2 = { src: 'images/image  (2).mp4', type: 'video', alt: 'Walk video 2' };
+const mp4Item3 = { src: 'images/new vid.mp4', type: 'video', alt: 'Walk video 3' };
 items.push(mp4Item);
 createGalleryItem(mp4Item, items.length - 1);
 items.push(mp4Item2);
 createGalleryItem(mp4Item2, items.length - 1);
+items.push(mp4Item3);
+createGalleryItem(mp4Item3, items.length - 1);
 
 // Lightbox elements
 const lightbox = document.getElementById("lightbox");
