@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Members | Oadby Hillwalking Club</title>
+
+  <meta name="description" content="Oadby Hillwalking Club members area" />
+  <link rel="icon" type="image/png" href="images/OADBY (1).png">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+<header class="site-header">
+  <div class="header-inner">
+
+    <h1 class="site-title">
+      <a href="index.html">Oadby Hillwalking Club</a>
+    </h1>
+
+    <nav class="main-nav">
+      <ul>
+        <li>
+          <a href="Monthly_walks.html">Walks</a>
+          <ul>
+            <li><a href="Monthly_walks.html">Walks</a></li>
+            <li><a href="walk_info.html">Essential Information</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="club_info.html">Club Information</a>
+          <ul>
+            <li><a href="club_info.html">Club Information</a></li>
+            <li><a href="membership.html">Membership</a></li>
+          </ul>
+        </li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="safeguarding.html">Safeguarding</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="members.html" aria-current="page">Members</a></li>
+      </ul>
+    </nav>
+
+    <button class="menu-toggle" aria-label="Open menu">☰</button>
+
+    <div class="logo-wrap">
+      <img src="images/OADBY (1).png" alt="OHWC logo" class="logo">
+    </div>
+
+  </div>
+</header>
+
+<main class="content">
+  <div class="content-inner narrow">
+
+    <section class="hero">
+      <h2>Oadby Hillwalking Club</h2>
+      <h3>Members Area</h3>
+    </section>
+
+    <!-- Password gate: shown until the shared password is verified -->
+    <section id="password-gate" class="password-gate">
+      <p>This page is for OHWC members only. Enter the club password to continue.</p>
+      <form id="password-form" autocomplete="off">
+        <label for="password-input" class="sr-only">Password</label>
+        <input type="password" id="password-input" name="password" placeholder="Password" required />
+        <button type="submit">Enter</button>
+      </form>
+      <p id="password-error" class="password-error" hidden>Incorrect password — please try again.</p>
+    </section>
+
+    <!-- Members content: hidden until unlocked -->
+    <section id="members-content" class="members-content" hidden>
+
+      <div class="notice">
+        Need to change your details? Use the "edit your response" link Google emailed you when you
+        submitted the form. If you can't find it, contact
+        <a href="mailto:ohwcmail@gmail.com">ohwcmail@gmail.com</a>.
+      </div>
+
+      <div class="tabs" role="tablist" aria-label="Members area sections">
+        <button class="tab-btn" role="tab" id="tab-signup" aria-controls="panel-signup" aria-selected="true">Sign up</button>
+        <button class="tab-btn" role="tab" id="tab-roster" aria-controls="panel-roster" aria-selected="false" tabindex="-1">Who's coming</button>
+      </div>
+
+      <div class="tab-panel" id="panel-signup" role="tabpanel" aria-labelledby="tab-signup">
+        <div class="form-embed">
+          <iframe
+            src="https://docs.google.com/forms/d/e/1FAIpQLSew1yK84Hyae41sqkBglRRFsEiV_KV1Kq2REu2MI1MkElmCaQ/viewform?embedded=true"
+            title="Member sign-up form"
+            width="100%"
+            height="900"
+            frameborder="0"
+            marginheight="0"
+            marginwidth="0">
+            Loading…
+          </iframe>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="panel-roster" role="tabpanel" aria-labelledby="tab-roster" hidden>
+        <p>Live from the club roster — refreshes each time you open this page.</p>
+        <div id="roster-status" class="roster-status">Loading roster…</div>
+        <div id="roster-table-wrap" class="roster-table-wrap" hidden></div>
+      </div>
+
+    </section>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <p>
+    © 2026 Oadby Hillwalking Club |
+    Built with ❤️
+  </p>
+</footer>
+
+<script>
+const toggle = document.querySelector(".menu-toggle");
+const nav = document.querySelector(".main-nav");
+
+toggle.addEventListener("click", () => {
+  nav.classList.toggle("active");
+  document.querySelectorAll('.main-nav li').forEach(li => li.classList.remove('open'));
+});
+
+document.querySelectorAll('.main-nav > ul > li > a').forEach(a => {
+  a.addEventListener('click', (e) => {
+    if (window.innerWidth <= 768) {
+      const li = a.parentElement;
+      if (li.querySelector('ul')) {
+        e.preventDefault();
+        li.classList.toggle('open');
+      }
+    }
+  });
+});
+
+// --- Tabs ---
+const tabButtons = Array.from(document.querySelectorAll(".tab-btn"));
+
+function selectTab(btn) {
+  tabButtons.forEach(b => {
+    const selected = b === btn;
+    b.setAttribute("aria-selected", selected);
+    b.tabIndex = selected ? 0 : -1;
+    document.getElementById(b.getAttribute("aria-controls")).hidden = !selected;
+  });
+}
+
+tabButtons.forEach((btn, i) => {
+  btn.addEventListener("click", () => selectTab(btn));
+  btn.addEventListener("keydown", (e) => {
+    if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+    const dir = e.key === "ArrowRight" ? 1 : -1;
+    const next = tabButtons[(i + dir + tabButtons.length) % tabButtons.length];
+    next.focus();
+    selectTab(next);
+  });
+});
+
+// --- Password gate ---
+const CHECK_URL = "https://script.google.com/macros/s/AKfycbztOC2RB7AuRjlt970-ai8w5hvfzCHq6ObgU3oX_2VU6kv5YAdtbRpc6f76xMQ9ilI0EQ/exec";
+const SESSION_KEY = "ohwc_members_unlocked";
+
+const gate = document.getElementById("password-gate");
+const membersContent = document.getElementById("members-content");
+const form = document.getElementById("password-form");
+const input = document.getElementById("password-input");
+const errorMsg = document.getElementById("password-error");
+
+function unlock() {
+  gate.hidden = true;
+  membersContent.hidden = false;
+  sessionStorage.setItem(SESSION_KEY, "1");
+  loadRoster();
+}
+
+// --- Roster table (published Google Sheet CSV) ---
+const ROSTER_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSJ6z8RFifirSyrF-pzS0U8zv-09tymow4rCDSd-yYQsUw2e8A1b95AYN-jgmaBdvOhjWuHTKVAgfLb/pub?gid=1551266036&single=true&output=csv";
+
+// Minimal CSV parser: handles quoted fields, escaped quotes ("") and commas/newlines inside quotes
+function parseCSV(text) {
+  const rows = [];
+  let row = [];
+  let field = "";
+  let inQuotes = false;
+
+  for (let i = 0; i < text.length; i++) {
+    const char = text[i];
+    const next = text[i + 1];
+
+    if (inQuotes) {
+      if (char === '"' && next === '"') { field += '"'; i++; }
+      else if (char === '"') { inQuotes = false; }
+      else { field += char; }
+    } else {
+      if (char === '"') { inQuotes = true; }
+      else if (char === ",") { row.push(field); field = ""; }
+      else if (char === "\n" || char === "\r") {
+        if (char === "\r" && next === "\n") i++;
+        row.push(field);
+        rows.push(row);
+        row = [];
+        field = "";
+      } else {
+        field += char;
+      }
+    }
+  }
+  if (field.length || row.length) { row.push(field); rows.push(row); }
+  return rows.filter(r => r.some(cell => cell.trim() !== ""));
+}
+
+function renderRosterTable(rows) {
+  const wrap = document.getElementById("roster-table-wrap");
+  const status = document.getElementById("roster-status");
+
+  if (!rows.length) {
+    status.textContent = "No sign-ups yet.";
+    return;
+  }
+
+  const [headerRow, ...bodyRows] = rows;
+  const table = document.createElement("table");
+  table.className = "roster-table";
+
+  const thead = document.createElement("thead");
+  const headTr = document.createElement("tr");
+  headerRow.forEach(h => {
+    const th = document.createElement("th");
+    th.textContent = h;
+    headTr.appendChild(th);
+  });
+  thead.appendChild(headTr);
+  table.appendChild(thead);
+
+  const tbody = document.createElement("tbody");
+  bodyRows.forEach(r => {
+    const tr = document.createElement("tr");
+    r.forEach(cell => {
+      const td = document.createElement("td");
+      td.textContent = cell;
+      tr.appendChild(td);
+    });
+    tbody.appendChild(tr);
+  });
+  table.appendChild(tbody);
+
+  wrap.innerHTML = "";
+  wrap.appendChild(table);
+  wrap.hidden = false;
+  status.hidden = true;
+}
+
+async function loadRoster() {
+  const status = document.getElementById("roster-status");
+  try {
+    const res = await fetch(`${ROSTER_CSV_URL}&_=${Date.now()}`); // cache-bust so it's always fresh
+    if (!res.ok) throw new Error("Network response was not OK");
+    const text = await res.text();
+    renderRosterTable(parseCSV(text));
+  } catch (err) {
+    status.textContent = "Couldn't load the roster right now — please refresh to try again.";
+  }
+}
+
+// Skip the prompt if already unlocked earlier this browser session
+if (sessionStorage.getItem(SESSION_KEY) === "1") {
+  unlock();
+}
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  errorMsg.hidden = true;
+
+  const submitBtn = form.querySelector("button[type='submit']");
+  submitBtn.disabled = true;
+  submitBtn.textContent = "Checking…";
+
+  try {
+    const url = `${CHECK_URL}?password=${encodeURIComponent(input.value)}`;
+    const res = await fetch(url);
+    const data = await res.json();
+
+    if (data.valid) {
+      unlock();
+    } else {
+      errorMsg.hidden = false;
+      input.value = "";
+      input.focus();
+    }
+  } catch (err) {
+    errorMsg.textContent = "Something went wrong — please try again.";
+    errorMsg.hidden = false;
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.textContent = "Enter";
+  }
+});
+</script>
+</body>
+</html>
