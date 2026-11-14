@@ -105,7 +105,7 @@ document.querySelectorAll('.main-nav > ul > li > a').forEach(a => {
   });
 });
 const gallery = document.getElementById("gallery");
-const totalImages = 148;
+const totalImages = 157;
 // store items as objects so we can support both images and videos
 const items = [];
 
@@ -146,6 +146,7 @@ for(let i = totalImages; i >= 1; i--){
 const mp4Item = { src: 'images/image  (1).mp4', type: 'video', alt: 'Walk video' };
 const mp4Item2 = { src: 'images/image  (2).mp4', type: 'video', alt: 'Walk video 2' };
 const mp4Item3 = { src: 'images/new vid.mp4', type: 'video', alt: 'Walk video 3' };
+const mp4Item4 = { src: 'images/Longshaw (Peak District)_Nov26.mp4', type: 'video', alt: 'Walk video 4' };
 items.push(mp4Item);
 createGalleryItem(mp4Item, items.length - 1);
 items.push(mp4Item2);
